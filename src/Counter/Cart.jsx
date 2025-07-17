@@ -1,4 +1,5 @@
 import React, { useState,useEffect} from "react";
+import "../index.css";
 import  { useContext } from "react";
 import { ItemContext } from "../Context/CounterContext.jsx";
 const Cart=()=>
@@ -6,11 +7,7 @@ const Cart=()=>
     const Items=useContext(ItemContext)
     
     const [counts,setCount]=useState([]);
-//     useEffect(() => {
-//     if (Items && Items.item && Items.item.length > 0) {
-//       setCount(Items.item.map(() => 1));
-//     }
-//   }, [Items.item]);
+
 
 useEffect(() => {
   if (Items && Items.item) {
@@ -44,29 +41,35 @@ useEffect(() => {
       Items.setTotal(Items.total-price)
       
     }
-    // const handlereset=()=>
-    // {
-    //   setCount(1);
-    // }
+    const handlereset=()=>
+    {
+      setCount([]);
+      Items.setTotal(0);
+      Items.setItem([]);
+    }
 
     return(
-        <div className="bg-red p-4 rounded shadow-md">
+        <div className=" w-70 bg-blue-500 rounded shadow-md  gap-2 p-2 m-2  ">
             <h2>cart</h2>
             
             {Items && Items.item.map((item,index)=>
               
                     
-          <li key={index}>
-            {item.name}-{item.price} <button onClick={()=>handleplus(index,item.price)}>+</button> <button onClick={()=>handleminus(index,item.price)}>-</button> <span>{counts[index]?? 0}</span> </li> 
+          <li className=" bg-white p-2 m-2 rounded  " key={index}>
+             {item.name}-{item.price}
+             <button className="bg-green-500 rounded  h-7 w-7 text-center text-2xl items-center m-auto  " onClick={()=>handleplus(index,item.price)}>+</button> 
+            <button className="bg-red-500 rounded  h-7 w-7 text-center text-2xl items-center m-2 " onClick={()=>handleminus(index,item.price)}>-</button>
+             <span className="bg-gray-500 text-1xl rounded h-4 w-7 p-2 m-2">{counts[index]?? 0}</span> </li> 
           
             )
             
             }
-             {/* <button onClick={()=>handlereset}>Reset</button> */}
+        
               
             
              
-              <p>total={Items.total}</p>
+              <p className="text-2xl bg-gray-500 rounded w-50 p-2 m-auto text-center  ">total={Items.total}</p>
+              <button className="text-1xl bg-red-500 rounded w-30 p-2 m-2 text-center " onClick={handlereset}>Reset All </button>
         </div>
     )
 }

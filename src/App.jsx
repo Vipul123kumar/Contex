@@ -11,15 +11,18 @@ function App() {
 
   return (
     <Router>
-      <div className='flex flex-col items-center jusitfy-center gap-4 text-center text-1xl'>
+      <div className='flex flex-col  items-center jusitfy-center  text-center text-1xl'>
         <Routes>
           <Route path="/item" element={
             <>
-            <Item name="Book" price={20000} /> 
+            <div>
+            <Item name="Book" price={20000} image={'https://demoopc.aeipix.com/AX02/looka24/demo1/image/cache/catalog/Main-Banner-1-1903x840.jpg'} /> 
             <Item name="Pen" price={200}/> 
             <Item name="Car" price={30000}/>
-            <Cart/>
-             </>
+            </div>
+            <div className=''> <Cart/></div>
+           
+             </> 
               }
            />
           <Route path="/" element={<Home />} />

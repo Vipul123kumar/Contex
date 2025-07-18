@@ -10,9 +10,9 @@ const Cart=()=>
 
 
 useEffect(() => {
-  if (Items && Items.item) {
-    setCount(prevCounts => {
-      const newCounts = [...prevCounts];
+  if ( Items && Items.item) {
+    setCount(prevcounts => {
+      const newCounts = [...prevcounts];
 
       // If new items are added, initialize their counts
       while (newCounts.length < Items.item.length) {
@@ -21,8 +21,9 @@ useEffect(() => {
 
       return newCounts;
     });
+      
   }
-}, [Items.item]);
+}, [Items.item]); 
 
 
     const handleplus=(index,price)=>
@@ -47,10 +48,16 @@ useEffect(() => {
       Items.setTotal(0);
       Items.setItem([]);
     }
+    const handleDelete=(index,price)=>
+    {
+      let no=counts[index]
+         Items.setTotal(Items.total-no*price);
+         Items.setItem(Items.item.filter((e,i)=>i!=index))
+    }
 
     return(
         <div className=" w-70 bg-blue-500 rounded shadow-md  gap-2 p-2 m-2  ">
-            <h2>cart</h2>
+            <h2>cart</h2> 
             
             {Items && Items.item.map((item,index)=>
               
@@ -58,8 +65,10 @@ useEffect(() => {
           <li className=" bg-white p-2 m-2 rounded  " key={index}>
              {item.name}-{item.price}
              <button className="bg-green-500 rounded  h-7 w-7 text-center text-2xl items-center m-auto  " onClick={()=>handleplus(index,item.price)}>+</button> 
-            <button className="bg-red-500 rounded  h-7 w-7 text-center text-2xl items-center m-2 " onClick={()=>handleminus(index,item.price)}>-</button>
-             <span className="bg-gray-500 text-1xl rounded h-4 w-7 p-2 m-2">{counts[index]?? 0}</span> </li> 
+            <button className="bg-red-500 rounded  h-7 w-7 text-center text-2xl items-center m-2" disabled={counts[index]<=1}  onClick={()=>handleminus(index,item.price)}>-</button>
+             <span className="bg-gray-500 text-1xl rounded h-4 w-7 p-2 m-2">{counts[index]?? 0}</span>
+             <button className="bg-red-500 rounded  h-7 w-17 text-center text-1xl items-center m-2" onClick={()=>handleDelete(index,item.price)}>Delete</button>
+              </li> 
           
             )
             

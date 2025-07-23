@@ -65,7 +65,7 @@ useEffect(() => {
           <li className=" bg-white p-2 m-2 rounded  " key={index}>
              {item.name}-{item.price}
              <button className="bg-green-500 rounded  h-7 w-7 text-center text-2xl items-center m-auto  " onClick={()=>handleplus(index,item.price)}>+</button> 
-            <button className="bg-red-500 rounded  h-7 w-7 text-center text-2xl items-center m-2" disabled={counts[index]<=1}  onClick={()=>handleminus(index,item.price)}>-</button>
+            <button className="bg-red-500 rounded  h-7 w-7 text-center text-2xl items-center m-2" disabled={counts[index]<=2}  onClick={()=>handleminus(index,item.price)}>-</button>
              <span className="bg-gray-500 text-1xl rounded h-4 w-7 p-2 m-2">{counts[index]?? 0}</span>
              <button className="bg-red-500 rounded  h-7 w-17 text-center text-1xl items-center m-2" onClick={()=>handleDelete(index,item.price)}>Delete</button>
               </li> 
@@ -74,7 +74,7 @@ useEffect(() => {
             
             }
         
-              
+            
             
              
               <p className="text-2xl bg-gray-500 rounded w-50 p-2 m-auto text-center  ">total={Items.total}</p>
